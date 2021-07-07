@@ -1,67 +1,55 @@
 from tkinter import *
+from tkinter import messagebox
 
 visitor_login = Tk()
 visitor_login.title("Life Choices Online")
-visitor_login.geometry("800x500")
+visitor_login.geometry("500x500")
 visitor_login.config(bg="skyblue")
 
-def clear():
-    name_input.delete(0, END)
-    surname_input.delete(0, END)
-    id_input.delete(0, END)
-    phone_input.delete(0, END)
-    kin_name_input.delete(0, END)
-    kin_phone_input.delete(0, END)
+def login():
+    if user_input.get() == '' or passw_input.get() == '':
+        messagebox.showerror("Invalid Entry", "Please fill in required fields")
 
-def exit_program():
+def new():
+    visitor_login.destroy()
+    import register
+
+def clear():
+    user_input.delete(0, END)
+    passw_input.delete(0, END)
+
+def exit():
     visitor_login.destroy()
     import main
 
 # Creating Labels
-visit = Label(visitor_login, text="Register", font="Arial 30 italic", bg="skyblue")
-user = Label(visitor_login, text="User Details", font="Arial 20 italic", bg="skyblue")
-name = Label(visitor_login, text="Enter Name", bg="skyblue")
-surname = Label(visitor_login, text="Enter Surname", bg="skyblue")
-id = Label(visitor_login, text="Enter ID Number", bg="skyblue")
-phone = Label(visitor_login, text="Enter Phone Number", bg="skyblue")
-kin = Label(visitor_login, text="Emergency Contact", font="Arial 20 italic", bg="skyblue")
-kin_name = Label(visitor_login, text="Enter Name", bg="skyblue")
-kin_phone = Label(visitor_login, text="Enter Phone Number", bg="skyblue")
+head1 = Label(visitor_login, text="Login", font="Arial 25 italic", bg="skyblue")
+user = Label(visitor_login, text="Enter Username: ", font="Arial 15 bold", bg="skyblue")
+passw = Label(visitor_login, text="Enter Password: ", font="Arial 15 bold", bg="skyblue")
 
 # Creating Entries
-name_input = Entry(visitor_login)
-surname_input = Entry(visitor_login)
-id_input = Entry(visitor_login)
-phone_input = Entry(visitor_login)
-kin_name_input = Entry(visitor_login)
-kin_phone_input = Entry(visitor_login)
+user_input = Entry(visitor_login)
+passw_input = Entry(visitor_login, show="*")
 
 # Creating Buttons
+login = Button(visitor_login, text="Login", width=10, borderwidth=10, command=login)
+register = Button(visitor_login, text="Register as a new user", command=new)
 clear = Button(visitor_login, text="Clear", command=clear)
-exit = Button(visitor_login, text="Return to main page", command=exit_program)
-login = Button(visitor_login, text="Create User")
+back = Button(visitor_login, text="Return to main page", command=exit)
 
 # Placing Buttons
-clear.place(x=200, y=400)
-exit.place(x=450, y=400)
+login.place(x=190, y=300)
+register.place(x=30, y=400)
+clear.place(x=340, y=250)
+back.place(x=320, y=400)
 
 # Placing Entries
-name_input.place(x=200, y=200)
-surname_input.place(x=200, y=250)
-id_input.place(x=200, y=300)
-phone_input.place(x=200, y=350)
-kin_name_input.place(x=550, y=200)
-kin_phone_input.place(x=550, y=250)
+user_input.place(x=280, y=130)
+passw_input.place(x=280, y=180)
 
 # Placing Labels
-visit.place(x=340, y=30)
-user.place(x=150, y=130)
-name.place(x=50, y=200)
-surname.place(x=50, y=250)
-id.place(x=50, y=300)
-phone.place(x=50, y=350)
-kin.place(x=470, y=130)
-kin_name.place(x=400, y=200)
-kin_phone.place(x=400, y=250)
+head1.place(x=200, y=50)
+user.place(x=60, y=130)
+passw.place(x=60, y=180)
 
 visitor_login.mainloop()

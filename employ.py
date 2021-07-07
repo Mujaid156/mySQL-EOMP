@@ -1,9 +1,18 @@
 from tkinter import *
+from tkinter import messagebox
 
 employee_login = Tk()
 employee_login.title("Life Choices Online")
 employee_login.geometry("500x500")
 employee_login.config(bg="skyblue")
+
+def login():
+    if user_input.get() == '' or passw_input.get() == '':
+        messagebox.showerror("Invalid Entry", "Please fill in required fields")
+
+def new():
+    employee_login.destroy()
+    import register
 
 def clear():
     user_input.delete(0, END)
@@ -14,17 +23,17 @@ def exit():
     import main
 
 # Creating Labels
-head1 = Label(employee_login, text="Login", font="Arial 25 italic")
-user = Label(employee_login, text="Enter Username: ", font="Arial 15 bold")
-passw = Label(employee_login, text="Enter Password: ", font="Arial 15 bold")
+head1 = Label(employee_login, text="Login", font="Arial 25 italic", bg="skyblue")
+user = Label(employee_login, text="Enter Username: ", font="Arial 15 bold", bg="skyblue")
+passw = Label(employee_login, text="Enter Password: ", font="Arial 15 bold", bg="skyblue")
 
 # Creating Entries
 user_input = Entry(employee_login)
 passw_input = Entry(employee_login, show="*")
 
 # Creating Buttons
-login = Button(employee_login, text="Login", width=10, borderwidth=10)
-register = Button(employee_login, text="Register as a new user")
+login = Button(employee_login, text="Login", width=10, borderwidth=10, command=login)
+register = Button(employee_login, text="Register as a new user", command=new)
 clear = Button(employee_login, text="Clear", command=clear)
 back = Button(employee_login, text="Return to main page", command=exit)
 
