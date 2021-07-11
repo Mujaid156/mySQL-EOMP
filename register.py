@@ -1,9 +1,30 @@
 from tkinter import *
+import mysql.connector
+from tkinter import messagebox
 
 register = Tk()
 register.title("Life Choices Online")
 register.geometry("800x500")
 register.config(bg="skyblue")
+
+mydb = mysql.connector.connect(host="localhost",user="lifechoices",password="@Lifechoices1234", auth_plugin='mysql_native_password',database="lifechoices")
+def into_database():
+    x = name_input.get()
+    y = surname_input.get()
+    z = id_input.get()
+    m = phone_input.get()
+    c = kin_name_input.get()
+    d = kin_phone_input.get()
+    if x == '' or y == '' or z == '' or m == '' or c == '' or d == '':
+        messagebox.showinfo("Invalid Entry", "Please fillin all required feilds")
+    else:
+        cursor = mydb.cursor()
+        cursor.excute('INSERT INTO Students (Name, Surname, ID_number, Cellnumber, Kin_name, Kin_number) VALUES (%s, %s, %s, %s, %s, $s)',
+                        (x, y, z, m, c, d))
+        mydb.commit()
+        cursor.insert('', 'end', text="", values=(x, y, z, m, c, d))
+        messagebox.showinfo("Well done", "Success")
+
 
 def clear():
     name_input.delete(0, END)
@@ -39,11 +60,12 @@ kin_phone_input = Entry(register)
 # Creating Buttons
 clear = Button(register, text="Clear", command=clear)
 exit = Button(register, text="Return to main page", command=exit_program)
-login = Button(register, text="Create User")
+login = Button(register, text="Create User", command=into_database)
 
 # Placing Buttons
 clear.place(x=200, y=400)
 exit.place(x=450, y=400)
+login.place(x=300, y=400)
 
 # Placing Entries
 name_input.place(x=200, y=200)

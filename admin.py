@@ -12,7 +12,7 @@ def login():
 
 def new():
     admin_login.destroy()
-    import register
+    import visitor
 
 def clear():
     user_input.delete(0, END)
